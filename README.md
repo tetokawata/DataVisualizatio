@@ -1,3 +1,3 @@
 # Data Visualization
 
-- Data Visualization用の講義レポジトリです。
+- Data Visualization用の講義レポジトリです
