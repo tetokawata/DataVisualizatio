@@ -1,0 +1,54 @@
+---
+title: "価格予測AI作成"
+author: "川田恵介"
+date: now
+format: html
+execute: 
+  warning: false
+---
+
+# SetUp
+
+```{r}
+set.seed(111)
+
+library(tidyverse)
+
+data <- read_csv("data.csv")
+
+N <- nrow(data)
+
+id_train <- sample(1:N, 0.8*N)
+
+train <- data[id_train,]
+
+test <- data[-id_train,]
+```
+
+- 訓練に8割、テストに2割を用いる
+
+# Estimation
+
+```{r}
+ols <- lm(Price ~ ., train)
+tree <- rpart::rpart(Price ~., train)
+```
+
+- trainのみを用いて、OLS/回帰木を推定
+
+# Evaluation
+
+```{r}
+pred_ols <- predict(ols, test)
+
+pred_tree <- predict(tree, test)
+
+plot(pred_ols,pred_tree)
+
+mean((test$Price - pred_tree)^2)/
+  mean((test$Price - pred_ols)^2)
+```
+
+- 回帰木は、OLSに比べて、40%程度パフォーマンスが悪い
+
+# ctr + alt + i
