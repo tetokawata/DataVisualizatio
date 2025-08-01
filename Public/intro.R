@@ -49,7 +49,18 @@ ggplot(
 
 # OLS ----
 
-lm(Price ~ Distance, data)
+model <- lm(year_2024 ~ Distance + Size, data)
+
+dotwhisker::dwplot(model, ci = 0)
+
+# District ----
+#
+
+model <- estimatr::lm_robust(Price ~ 0 + District, data)
+
+dotwhisker::dwplot(model)
+
+# estimatr tidyverse dotwhisker
 
 # ctr + A -> ctr + Enter
 # ctr + C -> ctr + V
