@@ -1,6 +1,14 @@
 
 Q1 Y = Price, X= [Size,Tenure,Distance] として、予測モデルをOLSとLASSOで推定し、その性能を評価せよ
 
+Q2 Y = Price, D = Reform, X = [Size,Tenure,Distance] として、Dについて、Xをバランスさせた比較を行え
+
+- Xについて交差項と二乗項までを追加し、Double selectionを用いよ
+
+Q3 予測モデルの推定において、LASSOを用いる利点を講義を踏まえて述べよ
+
+Q4 バランス後の比較において、LASSOを用いたDouble selectionの利点を講義を踏まえて述べよ
+
 - Hint: サンプル分割による性能評価を必ず行うこと
 
 - 一切の参照を可とする
