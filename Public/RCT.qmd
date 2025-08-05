@@ -1,0 +1,57 @@
+---
+title: "Untitled"
+format: dashboard
+---
+
+```{r}
+
+library(tidyverse)
+library(AER)
+
+data("ResumeNames")
+
+
+```
+
+## Row
+
+```{r}
+#| title: バランスチェック
+table <- cobalt::bal.tab(
+  ethnicity ~ gender + call + city + college,
+  ResumeNames
+)
+
+cobalt::love.plot(table)
+```
+
+```{r}
+#| title: 平均効果
+
+Y <- if_else(ResumeNames$call == "yes",1,0)
+
+model <- estimatr::lm_robust(
+  Y ~ ethnicity,
+  ResumeNames
+)
+
+model_long <- estimatr::lm_robust(
+  Y ~ ethnicity + gender + college ,
+  ResumeNames
+)
+
+dotwhisker::dwplot(
+  list(model,model_long),
+  vars_order = "ethnicityafam")
+# alt + ctr + i
+```
+
+## Row
+
+```{r}
+estimatr::lm_robust(
+  Y ~ ethnicity,
+  ResumeNames
+)
+```
+
